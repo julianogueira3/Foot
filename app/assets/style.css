@@ -1,0 +1,126 @@
+/* Estilo para o cabeçalho */
+h1 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 10px;
+}
+
+/* Estilo para o controle de reprodução do vídeo */
+.play-button {
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Estilo para o tempo atual do vídeo */
+.current-time {
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+}
+
+/* Estilo para a seção de controles */
+.controls {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Estilo para os itens de rádio */
+.radio-items {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+
+/* Estilo para o dropdown */
+.dropdown-container {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+}
+
+.dropdown {
+    width: 150px;
+    margin: auto;
+}
+
+/* Estilo para o campo de entrada de vídeo */
+.input-container {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+}
+
+.video-input {
+    width: 100%;
+}
+
+/* Estilo para a seção principal */
+.main-section {
+    text-align: center;
+}
+
+/* Estilo para a seção de vídeo e gráfico */
+.video-chart-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o contêiner de vídeo */
+.video-container {
+    width: 48%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Estilo para os vídeos */
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Estilo para o contêiner do gráfico de dispersão */
+.scatter-plot-container {
+    text-align: center;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o gráfico de dispersão */
+.scatter-plot {
+    width: 100%;
+    margin: auto;
+}
+
+/* Estilo para o contêiner dos gráficos de velocidade e aceleração */
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Estilo para os gráficos de velocidade e aceleração */
+.velocity-chart, .acceleration-chart {
+    min-height: 340px;
+    max-width: 640px;
+    width: 48%;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Estilo para toda a aplicação */
+.app-layout {
+    text-align: center;
+    background-color: black;
+    margin: 0px;
+}
+

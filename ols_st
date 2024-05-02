@@ -1,0 +1,106 @@
+style.css
+
+/* Reset de margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para o corpo da página */
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Estilo para o cabeçalho */
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header h1 {
+    color: #fff;
+}
+
+/* Estilo para o dropdown */
+.dropdown {
+    width: 200px;
+    margin: 20px auto;
+}
+
+/* Estilo para os contêineres de vídeo */
+.video-container {
+    display: inline-block;
+    width: calc(50% - 20px);
+    margin: 10px;
+    position: relative;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilo para o botão de play */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o tempo atual do vídeo */
+.current-time {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Estilo para o scatter plot */
+.scatter-plot {
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Estilo para os contêineres de gráficos */
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+}
+
+/* Estilo para os gráficos */
+.chart {
+    width: 45%;
+}
+
+/* Estilo para os botões de controle de vídeo */
+.video-controls button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.video-controls button:hover {
+    background-color: #0056b3;
+}
