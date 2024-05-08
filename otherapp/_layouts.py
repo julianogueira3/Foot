@@ -3,7 +3,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_player
 
-external_stylesheets = ['/home/julia/New Dash/style.css']
+external_stylesheets = ['/home/julia/Dash/style.css']
 
 app = dash.Dash(__name__)
 
@@ -48,17 +48,17 @@ app_layout = html.Div([
     html.Div([
         # Vídeo e Gráfico de Velocidade
         html.Div([
-
+            # Vídeos lado a lado
             html.Div([
                 dash_player.DashPlayer(
                     id='movie_player',
-                    url=dash.get_asset_url('/home/julia/New Dash/app/assets/qatar2022_argentina_x_france_tactical_cam_1080p_middle_field.mkv'),
+                    url=dash.get_asset_url('qatar2022_argentina_x_france_tactical_cam_1080p_middle_field.mkv'),
                     controls=True,
                     style={'width': '48%', 'height': '100%', 'objectFit': 'contain', 'marginRight': '10px', 'marginLeft': '1%'}
                 ),
                 dash_player.DashPlayer(
                     id='movie_player_traq',
-                    url=dash.get_asset_url('/home/julia/New Dash/app/assets/qatar2022_argentina_x_france_tactical_cam_1080p_middle_field_highlighted.mp4'),
+                    url=dash.get_asset_url('qatar2022_argentina_x_france_tactical_cam_1080p_middle_field_highlighted.mp4'),
                     controls=True,
                     playing=False,  
                     style={'width': '48%', 'height': '100%', 'objectFit': 'contain', 'marginLeft': '10px', 'marginRight': '1%'}
@@ -67,7 +67,7 @@ app_layout = html.Div([
             ], style={'display': 'flex', 'justifyContent': 'space-around', 'textAlign': 'center', 'marginTop': '20px', 'marginBottom': '20px'}),
 
             html.Span(id='video-current-time', style={'text-align': 'center', 'margin-top': '10px','color':'white'}),
-            html.Button("Play", id="play-button", n_clicks=0, style={'margin': 'auto', 'display': 'block', 'marginTop': '20px'}),
+            html.Button("▶ ⏸", id="play-button", n_clicks=0, style={'margin': 'auto', 'display': 'block', 'marginTop': '20px'}),
 
             html.Div([
                 # Mapa de dispersão
@@ -84,6 +84,12 @@ app_layout = html.Div([
         ])
     ], style={'textAlign': 'center'}),
 
+    # html.Div([
+    #     # Mapa de dispersão
+    #     html.Div([
+    #         dcc.Graph(id='scatter-plot', style={'width': '100%', 'margin': 'auto'})
+    #     ])
+    # ], style={'textAlign': 'center', 'marginTop': '20px','display': 'flex','justifyContent': 'center','alignItems': 'center' })
 ],style={'textAlign': 'center','backgroundColor':'black', 'margin':'0px'} )
 
 if __name__ == '__main__':

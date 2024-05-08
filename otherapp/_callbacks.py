@@ -11,8 +11,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # Carregar imagem do campo e dados de coordenadas
-# campo_img = plt.imread('/home/julia/New Dash/app/assets/imagens/campo_corte.jpg')
-df = pd.read_csv('/home/julia/New Dash/data/coords.csv')
+campo_img = plt.imread('/home/julia/Dash/app/imagens/campo_corte.jpg')
+df = pd.read_csv('/home/julia/Dash/data/coords.csv')
 
 # Função para extrair as coordenadas utilizando eval
 def extract_xy(cell_value):
@@ -55,7 +55,7 @@ def calculate_velocity_and_acceleration(player_id):
     return listatime, listavt, listaa
 
 def update_velocity_chart(player_column):
-    player_id = f"{int(player_column[1]):02d}" 
+    player_id = f"{int(player_column[1]):02d}"  # Formatando para dois dígitos com zero à esquerda
     tempo, velocidade, _ = calculate_velocity_and_acceleration(player_id)
 
     # Gráfico de velocidade
@@ -73,7 +73,7 @@ def update_velocity_chart(player_column):
     return velocity_chart
 
 def update_acceleration_chart(player_column):
-    player_id = f"{int(player_column[1]):02d}"  
+    player_id = f"{int(player_column[1]):02d}"  # Formatando para dois dígitos com zero à esquerda
     tempo, _, aceleracao = calculate_velocity_and_acceleration(player_id)
 
     # Gráfico de aceleração
@@ -91,12 +91,9 @@ def update_acceleration_chart(player_column):
     return acceleration_chart
 
 
+
 def update_scatter_plot(player_column):
-    player_id = player_column[1]  
-    if int(player_id) > 9:  
-        player_id = int(player_id) 
-    else:
-        player_id = f"{int(player_id):02d}"  
+    player_id = player_column[1] if int(player_column[1]) > 9 else f"{int(player_column[1]):02d}"
     x = []
     y = []
     tempo = []  
@@ -114,54 +111,68 @@ def update_scatter_plot(player_column):
         xaxis_title='X',
         yaxis_title='Y',
         width=800,
-        height=600,
+        height=600, 
         template='plotly_white',
-        updatemenus=[
-            dict(
-                type="buttons",
-                buttons=[
-                    dict(
-                        label="▶",
-                        method="animate",
-                        args=[None, {"frame": {"duration": 0, "redraw": True}, "fromcurrent": True}],
-                    ),
-                    dict(
-                        label="⏸️",
-                        method="animate",
-                        args=[[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}],
-                    ),
-                ],
-                showactive=False,
-                direction="left",  
-                x=-0.3,  
-                y=-0.2,  
-                xanchor="left",
-                yanchor="bottom",
-            ),
-        ],
-        sliders=[ 
-            dict(
-                active=0,
-                steps=[
-                    dict(label=str(i), method="animate", args=[
-                        None, {"frame": {"duration": i * 100, "redraw": True}, "mode": "immediate"}]) for i in range(1, 11)
-                ],
-                pad={"t": 50},
-                len=0.9,
-                x=0.5, 
-                y=-0.3,  
-                xanchor="center",
-                yanchor="bottom",
-                transition=dict(duration=0),
-            ),
-        ],
+        xaxis=dict(range=[100, 400]),  
+        yaxis=dict(range=[400, 600]),  
     )
 
-    frames = [go.Frame(data=go.Scatter(x=x[:i+1], y=y[:i+1], mode='markers', marker=dict(color='blue', size=10), name='Path')) for i in range(len(x))]
+    frames = [go.Frame(data=go.Scatter(x=x[:i+1:10], y=y[:i+1:10], mode='markers', marker=dict(color='blue', size=10), name='Path'),
+                       name=f"frame{i+1}") for i in range(0, len(x), 10)]  # Espaçando os pontos e ajustando o tamanho dos pontos
 
     fig.frames = frames
 
-    fig.add_trace(go.Scatter(x=[x[0]], y=[y[0]], mode='markers', marker=dict(color='blue', size=10), name='Path'))
+    fig.add_trace(go.Scatter(x=[x[0]], y=[y[0]], mode='markers', marker=dict(color='blue', size=5), name='Path'))
+
+    # fig.update_layout(
+    #     updatemenus=[
+    #         dict(
+    #             type="buttons",
+    #             buttons=[
+    #                 dict(
+    #                     label="▶",
+    #                     method="animate",
+    #                     args=[None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True}],
+    #                 ),
+    #                 dict(
+    #                     label="⏸",
+    #                     method="animate",
+    #                     args=[[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}],
+    #                 ),
+    #             ],
+    #             showactive=False,
+    #             direction="left",  
+    #             x=-0.3,  
+    #             y=-0.2, 
+    #             xanchor="left",
+    #             yanchor="bottom",
+    #         ),
+    #     ],
+    #     sliders=[ 
+    #         dict(
+    #             active=0,
+    #             steps=[
+    #                 dict(label=str(i), method="animate", args=[
+    #                     [f"frame{i+1}"], {"frame": {"duration": 500 / (i + 1), "redraw": True}, "mode": "immediate"}]) for i in range(len(frames))
+    #             ],
+    #             pad={"t": 50},
+    #             len=0.9,
+    #             x=0.5, 
+    #             y=-0.3, 
+    #             xanchor="center",
+    #             yanchor="bottom",
+    #             transition=dict(duration=0),
+    #         ),
+    #     ],
+    #     annotations=[
+    #         dict(
+    #             text="Tempo: {0}".format(tempo[0]), 
+    #             xref="paper", yref="paper",
+    #             x=0.02, y=0.02,
+    #             showarrow=False
+    #         )
+    #     ]
+    # )
 
     return fig
 
@@ -173,9 +184,8 @@ def update_video_current_time(current_time):
         return "Tempo Atual: --:--" 
 
 def update_playing_state(n_clicks, current_playing_state, current_playing_state_traq):
-    if n_clicks % 2 == 1:  
-        return not current_playing_state, not current_playing_state_traq
+    if n_clicks % 2 == 1: 
+        return True, True  
     else:
-        return current_playing_state, current_playing_state_traq
-
+        return False, False  
 
